@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unplugged Lenau – robotics team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2f0;--ink:#1b2a2e;--muted:#5a6b6f;--line:#c9d3d0;--accent:#2f5d8a;--mark:#f0c04e;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141d20;--ink:#e6eeec;--muted:#93a5a8;--line:#2b3b3f;--accent:#7fb2e0}}
+:root[data-theme="dark"]{--bg:#141d20;--ink:#e6eeec;--muted:#93a5a8;--line:#2b3b3f;--accent:#7fb2e0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 "Bricolage Grotesque",system-ui,sans-serif}
+main{max-width:920px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--accent)} a:focus-visible,button:focus-visible{outline:3px solid var(--mark);outline-offset:2px}
+nav{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+nav b{margin-right:auto;font-weight:800}
+nav a{color:var(--ink);text-decoration:none} nav a:hover{text-decoration:underline}
+.hero{padding:72px 0 56px}
+.hero h1{font-size:clamp(44px,9vw,96px);line-height:.95;font-weight:800;letter-spacing:-.03em;margin:0 0 24px}
+.hero h1 span{background:linear-gradient(transparent 62%,var(--mark) 62%)}
+.hero p{max-width:52ch;color:var(--muted);font-size:20px;margin:0}
+section{padding:40px 0;border-top:1px solid var(--line)}
+h2{font-size:28px;margin:0 0 20px;letter-spacing:-.01em}
+.roster{list-style:none;margin:0;padding:0}
+.roster li{display:grid;grid-template-columns:48px 1fr auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.av{width:48px;height:48px;border-radius:50%;background:var(--accent);color:var(--bg);display:grid;place-items:center;font-weight:600}
+.roster small{display:block;color:var(--muted)}
+.tag{font-size:14px;color:var(--muted)}
+.filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.filters button{font:inherit;font-size:15px;padding:6px 14px;border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.proj{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.proj h3{margin:0 0 4px;font-size:20px}
+.proj p{margin:0;color:var(--muted)}
+@media(max-width:640px){.proj{grid-template-columns:1fr}.roster li{grid-template-columns:48px 1fr}.tag{grid-column:2}}
+footer{padding-top:24px;color:var(--muted);font-size:15px}
+</style>
+</head>
+<body>
+<main>
+<nav><b>Unplugged Lenau</b><a href="#people">People</a><a href="#work">Robots</a><a href="#contact">Contact</a></nav>
+
+<header class="hero">
+<h1>We build robots. <span>Unplugged.</span></h1>
+<p>Unplugged Lenau is a robotics team of nine: programmers, builders, and the people who tell our story. This is a mock site: robot descriptions and links are still placeholders.</p>
+</header>
+
+<section id="people">
+<h2>People</h2>
+<div class="filters" role="group" aria-label="Filter by group">
+<button aria-pressed="true" data-f="all">Everyone</button>
+<button aria-pressed="false" data-f="Programming">Programming</button>
+<button aria-pressed="false" data-f="PR and Marketing">PR and Marketing</button>
+<button aria-pressed="false" data-f="Construction">Construction</button>
+</div>
+<ul class="roster" id="roster"></ul>
+</section>
+
+<section id="work">
+<h2>Our robots</h2>
+<div class="proj">
+<div><h3>Competition robot</h3><p>This season's main build: drivetrain, manipulator and game-piece intake.</p></div>
+<div><h3>Autonomous routines</h3><p>Path following and vision-guided scoring for the first 15 seconds.</p></div>
+<div><h3>Practice bot</h3><p>A lighter chassis for driver training and testing new ideas.</p></div>
+<div><h3>Outreach demos</h3><p>Hands-on robot demos for schools and community events.</p></div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Want to sponsor, mentor or join? Email <a href="mailto:team@example.com">team@example.com</a>.</p>
+</section>
+<footer>Mock site. Robot descriptions and contact details are placeholders.</footer>
+</main>
+<script>
+const people=[
+["Vlad Barbu","Programming"],["Ștefan Lazău","Programming"],["Matei Catană","Programming"],
+["Mina Șelariu","PR and Marketing"],["Sara Bob","PR and Marketing"],["Patricia Lazăr","PR and Marketing"],
+["Titus Mirea","Construction"],["Ștefan Bogda","Construction"],["Bogdan Marin","Construction"]];
+const ul=document.getElementById("roster");
+function render(f){
+ul.innerHTML=people.filter(p=>f==="all"||p[1]===f).map(p=>
+`<li><div class="av" aria-hidden="true">${p[0].split(" ").map(w=>w[0]).join("")}</div><div>${p[0]}</div><span class="tag">${p[1]}</span></li>`).join("");}
+document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{
+document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+render(b.dataset.f);});
+render("all");
+</script>
+</body>
+</html>
